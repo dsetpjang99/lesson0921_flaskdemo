@@ -21,7 +21,13 @@ def get_pm25_json():
     xdata = [value[0] for value in values]
     ydata = [value[2] for value in values]
 
-    json_data = {"site": xdata, "pm25": ydata}
+    datas = list(zip(xdata, ydata))
+    # print(datas)
+    datas = sorted(datas, key=lambda x: x[1])
+    print(datas)
+
+    json_data = {"site": xdata, "pm25": ydata, "highest": datas[-1], "lowest": datas[0]}
+    # print(json_data)
 
     return json_data
 
@@ -106,5 +112,5 @@ def scrape_stocks():
 
 if __name__ == "__main__":
     # print(scrape_stocks())
-    # print(get_pm25_json())
-    print(scrape_six_pm25())
+    print(get_pm25_json())
+    # print(scrape_six_pm25())
